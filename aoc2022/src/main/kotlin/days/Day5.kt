@@ -6,14 +6,14 @@ object Day5 {
     fun star1(input: String) : String {
         return input
             .createStacks()
-            .followInstructions(input.getInstructions())
+            .followInstructions(input.getInstructions(), true)
             .map { it.last() }
             .joinToString("")
     }
     fun star2(input: String) : String {
         return input
             .createStacks()
-            .followInstructions2(input.getInstructions())
+            .followInstructions(input.getInstructions(), false)
             .map { it.last() }
             .joinToString("")
     }
@@ -30,20 +30,11 @@ private fun String.getInstructions(): List<List<Int>> {
         .map { it.map { c -> c.toInt() } }
 }
 
-private fun List<MutableList<String>>.followInstructions(instructions: List<List<Int>>) : List<List<String>>{
-    instructions.forEach { instruction ->
-        for (i in 0 until instruction[0]) {
-            this[instruction[2]-1].add(this[instruction[1]-1].last())
-            this[instruction[1]-1].removeAt(this[instruction[1]-1].lastIndex)
-        }
-    }
-    return this
-}
-
-private fun List<MutableList<String>>.followInstructions2(instructions: List<List<Int>>) : List<List<String>>{
+private fun List<MutableList<String>>.followInstructions(instructions: List<List<Int>>, isStar1 : Boolean) : List<List<String>>{
     instructions.forEach { instruction ->
         val lastIndex = this[instruction[1]-1].lastIndex + 1
         val i = this[instruction[1]-1].subList(lastIndex-instruction[0], lastIndex)
+        if (isStar1) i.reverse()
         this[instruction[2]-1].addAll(i)
         for (j in lastIndex-1 downTo  lastIndex-instruction[0]) {
             this[instruction[1]-1].removeAt(j)
@@ -51,7 +42,6 @@ private fun List<MutableList<String>>.followInstructions2(instructions: List<Lis
     }
     return this
 }
-
 
 private fun String.createStacks() : List<MutableList<String>> {
     val crates : MutableList<MutableList<String>> = mutableListOf()
