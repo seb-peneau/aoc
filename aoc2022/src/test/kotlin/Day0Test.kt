@@ -8,4 +8,10 @@ class Day0Test {
         val data = """"""
         assertEquals(0, Day0.star1(data))
     }
+
+    @Test
+    fun star2() {
+        val data = """"""
+        assertEquals(0, Day0.star2(data))
+    }
 }
