@@ -15,6 +15,7 @@ const days = [
     "./days/day12",
     "./days/day13",
     "./days/day14",
+    "./days/day15",
 ].map(require);
 
 const runParameter = process.argv[2]
