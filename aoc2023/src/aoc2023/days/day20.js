@@ -130,10 +130,8 @@ const part1 = (input) => {
 
     //console.log(map)
     for (let i = 0; i < 1000; i++) {
-        console.log("--------")
         push(map)
     }
-    console.log(nbHigh, nbLow)
     return nbHigh * nbLow
 }
 
