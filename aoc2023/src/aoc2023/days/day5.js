@@ -72,7 +72,6 @@ const part2 = (input) => {
             }
         })
     if (rules.length>0) transforms.push(rules)
-    console.log(transforms)
 
     seeds.forEach((seed, index) => {
         if (index%2 == 0) {
