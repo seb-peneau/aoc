@@ -1,0 +1,10 @@
+**/node_modules
+**/env
+**/coverage
+**/.vscode
+**/.idea
+**/.gradle
+**/.kotlin
+**/build
+**/gradle
+**/.DS_Store
