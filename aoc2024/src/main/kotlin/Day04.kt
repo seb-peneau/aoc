@@ -5,19 +5,15 @@ import kotlin.time.ExperimentalTime
 object Day4 {
     fun star1(input: String) : Int {
         val matrix = input.lines().map { it.split("") }
-        return input
-            .lines()
-            .mapIndexed { y, line ->
-                line
-                    .split("")
-                    .mapIndexed { x,letter ->
-                        if (letter != "X") {
-                            0
-                        } else {
-                            checkLetter(matrix, x, y)
-                        }
-                    }.sum()
-            }.sum()
+        var res = 0
+        matrix.forEachIndexed { y, line ->
+            line.forEachIndexed { x, letter ->
+                if (letter == "X") {
+                    res += checkLetter(matrix, x, y)
+                }
+            }
+        }
+        return res
     }
 
     private fun checkLetter(matrix: List<List<String>>, x: Int, y: Int): Int {
@@ -35,19 +31,17 @@ object Day4 {
 
     fun star2(input: String) : Int {
         val matrix = input.lines().map { it.split("") }
-        return input
-            .lines()
-            .mapIndexed { y, line ->
-                line
-                    .split("")
-                    .mapIndexed { x,letter ->
-                        if (letter != "A") {
-                            0
-                        } else {
-                            checkLetterStar2(matrix, x, y)
-                        }
-                    }.sum()
-            }.sum()    }
+        var res = 0
+        for (y in 0..matrix.size-1) {
+            for(x in 0..matrix[y].size-1) {
+                if (matrix[y][x] == "A") {
+                    res += checkLetterStar2(matrix, x, y)
+                }
+            }
+        }
+        return res
+    }
+
 
     private fun checkLetterStar2(matrix: List<List<String>>, x: Int, y: Int): Int {
         if ((x-1 >= 0 && y-1 >= 0 && x+1 < matrix[y].size && y+1 < matrix.size)) {
